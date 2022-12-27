@@ -14,7 +14,7 @@ class dataStorage : public eosio::contract
                         uint64_t primary_key() const {return id;}
                         EOSLIB_SERIALIZE(ttab,(id))
                 };
-                typedef multi_index<N(ttab),ttab> _ttab; // The table that will take up the RAM
+                typedef multi_index< "ttab"_n, ttab > _ttab; // The table that will take up the RAM
   
                 ///@abi action
                 void transfer( name from,
