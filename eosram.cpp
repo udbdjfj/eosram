@@ -43,10 +43,10 @@ class [[eosio::contract]] dataStorage : public contract {
 };
   
 extern "C" {
-        void apply( name receiver, name code, uint64_t action ) {
-                if( code == name("eosio.token") ) { // If the contract is invoked 
+        void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
+                if( code == "eosio.token"_n.value ) { // If the contract is invoked 
                                                // as part of a notification
-                        dataStorage thiscontract(receiver);
+                        dataStorage thiscontract(receiver.value);
                         switch( action ) {
                                 EOSIO_API( dataStorage, (transfer) ) //Handles the 
                                                                      //transfer function
