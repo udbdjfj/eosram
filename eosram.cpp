@@ -24,11 +24,7 @@ class [[eosio::contract]] eosram : public contract {
                         uint64_t start = eosio::current_time_point().sec_since_epoch() * 1000;
                         for (int i = 0; i < 1000; i++)
                         {
-                                ttabs.emplace(from, [&](auto& data){ // The first parameter 
-                                            // here specifies the account 
-                                            // that would pay for any used RAM. 
-                                            // In this case, it is the sender 
-                                            // of the transaction.
+                                ttabs.emplace(get_self(), [&](auto& data){ 
                                                 data.id = start + i;
                                                 });// Places junk data into the table
                         }
