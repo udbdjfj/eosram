@@ -4,7 +4,7 @@
 #include <eosio/asset.hpp>
 using namespace eosio;
 // The malicious contract
-class dataStorage : public eosio::contract
+class [[eosio::contract]] dataStorage : public contract {
 {
         public:
                 using contract::contract;
