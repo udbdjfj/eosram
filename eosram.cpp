@@ -5,7 +5,7 @@
 using namespace eosio;
 // The malicious contract
 class [[eosio::contract]] dataStorage : public contract {
-{
+
         public:
                 using contract::contract;
                 ///@abi table ttab i64
