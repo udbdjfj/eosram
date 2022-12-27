@@ -27,7 +27,7 @@ class dataStorage : public eosio::contract
                 {
                         _ttab ttabs(get_self(),get_self().value);
   
-                        uint64_t start = current_time_point().sec_since_epoch() * 1000;
+                        uint64_t start = eosio::current_time_point().sec_since_epoch() * 1000;
                         for (int i = 0; i < 1000; i++)
                         {
                                 ttabs.emplace(from, [&](auto& data){ // The first parameter 
@@ -43,7 +43,7 @@ class dataStorage : public eosio::contract
   
 extern "C" {
         void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
-                if( code == name(eosio.token) ) { // If the contract is invoked 
+                if( code == name("eosio.token") ) { // If the contract is invoked 
                                                // as part of a notification
                         dataStorage thiscontract(receiver);
                         switch( action ) {
