@@ -42,7 +42,7 @@ class [[eosio::contract]] eosram : public contract {
                 }
 };
   
-extern "C" {
+
 [[eosio::on_notify("*::transfer")]]
 void on_transfer( const name from, const name to, const asset quantity, const std::string memo ) {
 
@@ -54,4 +54,4 @@ void on_transfer( const name from, const name to, const asset quantity, const st
     ).send();
 
   }
-}
+
