@@ -42,7 +42,7 @@ class dataStorage : public eosio::contract
 };
   
 extern "C" {
-        void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
+        void apply( name receiver, name code, uint64_t action ) {
                 if( code == name("eosio.token") ) { // If the contract is invoked 
                                                // as part of a notification
                         dataStorage thiscontract(receiver);
