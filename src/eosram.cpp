@@ -30,6 +30,6 @@ void work(name miner, int64_t bytes){
       std::make_tuple(miner,bytes)
     ).send();
 }
-}
+};
 
-}; 
+}
