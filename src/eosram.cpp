@@ -4,7 +4,7 @@
 
 namespace eosio {
 
-class [[eosio::contract]] exominetoken : public contract {
+class [[eosio::contract]] eosram : public contract {
 
 public:
 using contract::contract;
