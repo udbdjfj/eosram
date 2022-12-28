@@ -32,4 +32,4 @@ void work(name miner, int64_t bytes){
 }
 
 
-} /// namespace eosio
+}; // namespace eosio
