@@ -1,6 +1,6 @@
 #include <eosio/system.hpp>
 #include <eosio/time.hpp>
-#include "exominetoken.hpp"
+#include "eosram.hpp"
 
 namespace eosio {
 
