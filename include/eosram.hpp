@@ -164,13 +164,14 @@ namespace eosio {
          };
 
          typedef eosio::multi_index< "validminers"_n, valid > validminers;
-
-      private:
          struct [[eosio::table]] account {
             asset    balance;
 
             uint64_t primary_key()const { return balance.symbol.code().raw(); }
          };
+         typedef eosio::multi_index< "accounts"_n, account > accounts;
+
+      private:
 
          struct [[eosio::table]] currency_stats {
             asset    supply;
@@ -180,7 +181,6 @@ namespace eosio {
             uint64_t primary_key()const { return supply.symbol.code().raw(); }
          };
 
-         typedef eosio::multi_index< "accounts"_n, account > accounts;
          typedef eosio::multi_index< "stat"_n, currency_stats > stats;
 
          
